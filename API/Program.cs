@@ -1,4 +1,6 @@
 using API.Extensions;
+using API.Middleware;
+using Microsoft.AspNetCore.Builder;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +13,9 @@ builder.Services.AddApplicationServices(builder.Configuration, builder.Environme
 builder.Services.AddIdentiteServices(builder.Configuration);
 
 var app = builder.Build();
+
+// Exception hnadling
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseCors(builder =>
 {
