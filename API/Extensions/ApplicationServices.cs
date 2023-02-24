@@ -41,6 +41,7 @@ namespace API.Extensions
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             // Section of settings we added appsettings.json
             services.Configure<CloudinarySettings>(config.GetSection("CloudinarySection"));
+            services.AddScoped<IPhotoService, PhotoService>();
             return services;
         }
     }
