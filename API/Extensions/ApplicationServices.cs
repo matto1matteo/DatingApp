@@ -33,7 +33,11 @@ namespace API.Extensions
             // Liskov substitution principle, it's better to pass the interface and the implementation
             // expecially for testing purpose
             // services.AddScoped<TokenService>();
+            // Token service
             services.AddScoped<ITokenService, TokenService>();
+            // User repository service
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             return services;
         }
     }
