@@ -1,4 +1,5 @@
 using API.Data;
+using API.Helpers;
 using API.Interfaces;
 using API.Services;
 using Microsoft.EntityFrameworkCore;
@@ -38,6 +39,8 @@ namespace API.Extensions
             // User repository service
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            // Section of settings we added appsettings.json
+            services.Configure<CloudinarySettings>(config.GetSection("CloudinarySection"));
             return services;
         }
     }
