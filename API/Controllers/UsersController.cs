@@ -22,10 +22,17 @@ namespace API.Controllers
             this._repository = repository;
         }
 
-        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers([FromQuery] UserParams userParams)
         {
+            var currentUser = await _repository.GetUserByUsernameAsync(User.GetUserName());
+            userParams.CurrentUsername = currentUser.UserName;
+
+            if (String.IsNullOrEmpty(userParams.Gender))
+            {
+                userParams.Gender = currentUser.Gender == "male" ? "female" : "male";
+            }
+
             var users = await _repository.GetMembersAsync(userParams);
 
             Response.AddPaginationHeader(new PaginationHeader(
