@@ -40,7 +40,7 @@ namespace API.Extensions
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             // Section of settings we added appsettings.json
-            services.Configure<CloudinarySettings>(config.GetSection("CloudinarySection"));
+            services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
             services.AddScoped<IPhotoService, PhotoService>();
             return services;
         }

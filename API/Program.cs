@@ -13,7 +13,6 @@ builder.Services.AddControllers();
 // Custom Extension methods for IServiceCollection
 builder.Services.AddApplicationServices(builder.Configuration, builder.Environment);
 builder.Services.AddIdentiteServices(builder.Configuration);
-
 var app = builder.Build();
 
 // Exception hnadling

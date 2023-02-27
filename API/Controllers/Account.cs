@@ -6,7 +6,6 @@ using API.Entities;
 using API.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace API.Controllers
 {
@@ -14,8 +13,10 @@ namespace API.Controllers
     {
         private readonly DataContext _context;
         private readonly ITokenService _tokenService;
-        public Account(DataContext context, ITokenService tokenService)
+        private readonly IUserRepository __repository;
+        public Account(DataContext context, ITokenService tokenService, IUserRepository _repository)
         {
+            this.__repository = _repository;
             this._tokenService = tokenService;
             this._context = context;
             
@@ -48,7 +49,8 @@ namespace API.Controllers
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
             // AppUser user = _context.Users.FirstOrDefaultAsync(x => x.UserName == loginDto.Username);
-            AppUser user = await _context.Users.SingleOrDefaultAsync(x => x.UserName == loginDto.Username);
+            //AppUser user = await _context.Users.SingleOrDefaultAsync(x => x.UserName == loginDto.Username);
+            var user = await __repository.GetUserByUsernameAsync(loginDto.Username);
 
             if (user == null)
             {
