@@ -10,13 +10,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
-    public class Account: BaseController
+    public class AccountController: BaseController
     {
         private readonly DataContext _context;
         private readonly ITokenService _tokenService;
         private readonly IUserRepository __repository;
         private readonly IMapper _mapper;
-        public Account(DataContext context, ITokenService tokenService, IUserRepository _repository, IMapper mapper)
+        public AccountController(DataContext context, ITokenService tokenService, IUserRepository _repository, IMapper mapper)
         {
             this._mapper = mapper;
             this.__repository = _repository;

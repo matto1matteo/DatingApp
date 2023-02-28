@@ -47,6 +47,13 @@ namespace API.Data
                 user => user.DateOfBirth >= minDob && user.DateOfBirth <= maxDob
             );
 
+            // Ordering
+            query = userParams.OrderBy switch
+            {
+                "created" => query.OrderBy(user => user.Created),
+                _ => query.OrderBy(user => user.LastActive)
+            };
+
 
             return await PagedList<MemberDto>.CreateAsync(
                 query.AsNoTracking()
